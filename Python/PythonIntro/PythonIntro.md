@@ -1,36 +1,24 @@
 ---
+title: "Introduction to Python workshop notes"
+always_allow_html: yes
+output: 
+  html_document:
+    highlight: tango
+    toc: true
+    toc_float:
+      collapsed: true
 jupyter:
-  jupytext_format_version: '1.0'
-  jupytext_formats: ipynb,md:markdown,py
+  jupytext:
+    formats: ipynb,md:markdown,py,Rmd:rmarkdown
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.0'
+      jupytext_version: 0.8.6
   kernelspec:
     display_name: Python 3
     language: python
     name: python3
-  language_info:
-    codemirror_mode:
-      name: ipython
-      version: 3
-    file_extension: .py
-    mimetype: text/x-python
-    name: python
-    nbconvert_exporter: python
-    pygments_lexer: ipython3
-    version: 3.7.0
-  name: PythonIntro.ipynb
-  toc:
-    base_numbering: '1'
-    nav_menu:
-      height: 542px
-      width: 461px
-    number_sections: true
-    sideBar: true
-    skip_h1_title: true
-    title_cell: Table of Contents
-    title_sidebar: Contents
-    toc_cell: false
-    toc_position: {}
-    toc_section_display: true
-    toc_window_display: true
 ---
 
 # Introduction to Python
@@ -47,12 +35,8 @@ Accepting the defaults proposed by the Anaconda installer is generally recommend
 ### Download workshop materials
 Download the materials from [http://tutorials.iq.harvard.edu/Python/PythonIntro.zip](http://tutorials.iq.harvard.edu/Python/PythonIntro.zip) and extract the zipped directory (Right-click => Extract All on Windows, double-click on Mac).
 
-### Install and launch VSCode
-Start the `Anaconda Navigator` program in the usual way. Click the or `Launch` button under `VSCode`. (NOTE: you have have to first click `Install` and then `Launch`.)
-
-### Open the project folder
-In VSCode, click `File => Open Folder` and select the `PythonIntro` folder you downloaded and extracted previously.
-
+### Launch Jupyter Notebook
+Start the `Anaconda Navigator` program in the usual way. Click the or `Launch` button under `Jupyter Notebook`.
 
 ## Workshop goals and approach
 In this workshop you will
@@ -158,17 +142,11 @@ There are 5295 unique words in the text.
 
 NOTE: we will not always explicitly demonstrate everything you need to know in order to complete an exercise. Instead we focus on teaching you how to discover available methods and how use the help function to learn how to use them. It is expected that you will spend some time during the exercises looking for appropriate methods and perhaps reading documentation.
 
+1. Open the `Characters.txt` file and read its contents.
 
-```python
-# 1. Open the `Characters.txt` file and read its contents.
+2. Split text on newlines to produce a list with one element per line. Store the result as "alice_characters".
 
-```
-
-```python
-# 2. Split text on newlines to produce a list with one element per line.
-#    Store the result as "alice_characters".
-
-```
+# ```
 
 ### Working with lists
 The `split` methods we used to break up the text of *Alice in Wonderland* into words produced a *list*. A lot of the techniques we'll use later to analyze this text also produce lists, so its worth taking a minute to learn more about them.
@@ -274,22 +252,14 @@ len(alice_paragraphs)
 ## Exercise: count the number of main characters
 So far we've learned that there are 12 chapters, around 830 paragraphs, and about 26 thousand words in *Alice's Adventures in Wonderland*. Along the way we've also learned how to open a file and read its contents, split strings,  calculate the length of objects, discover methods for string and list objects, and index/subset lists in Python. Now it is time for you to put these skills to use to learn something about the main characters in the story.
 
-```python
-# 1. Count the number of main characters in the story (i.e., get the length
-#    of the list you created in previous exercise).
 
-```
+1. Count the number of main characters in the story (i.e., get the length   of the list you created in previous exercise).
 
-```python
-# 2. Extract and print just the first character from the list you created in
-#    the previous exercise.
 
-```
+2. Extract and print just the first character from the list you created in
+   the previous exercise.
 
-```python
-# 3. (BONUS, optional): Sort the list you created in step 2 alphabetically, and then extract the last element.
-
-```
+3. (BONUS, optional): Sort the list you created in step 2 alphabetically, and then extract the last element.
 
 ## Working with nested structures: words within paragraphs within chapters
 This far our analysis as treated the text as a "flat" data structure. For example, when we counted words we just counted words in the whole document, rather than counting the number of words in each chapter. If we want to treat our document as a nested structure, with words forming sentences, sentences forming paragraphs, paragraphs forming chapters, and chapters forming the book, we need to learn some additional tools. Specifically, we need to learn how to iterate over lists (or other collections) and do things with each element in a collection.
@@ -365,51 +335,31 @@ dict(zip(chapter_names,
 ## Exercise: Iterating and counting things
 Now that we know how to iterate using for-loops and list comprehensions the possibilities really start to open up. For example, we can use these techniques to count the number of times each character appears in the story. 
 
-```python
-# 1. Make sure you have both the text and the list of characters.
-#
-# Open and read both "Alice_in_wonderland.txt" and
-# "Characters.txt" if you have not already done so.
+1. Make sure you have both the text and the list of characters.
 
+Open and read both "Alice_in_wonderland.txt" and
+"Characters.txt" if you have not already done so.
 
-```
+2. Which chapter has the most words?
 
-```python
-# 2. Which chapter has the most words?
-#
-# Split the text into chaptes (i.e., split on "CHAPTER ")
-# and use a for-loop or list comprehension to iterate over
-# the chapters. For each chapter, split it into words and 
-# calculate the length.
+Split the text into chaptes (i.e., split on "CHAPTER ")
+and use a for-loop or list comprehension to iterate over
+the chapters. For each chapter, split it into words and 
+calculate the length.
 
+3. How many times is each character mentioned in the text?
 
-```
+Iterate over the list of characters using a for-loop or 
+list comprehension. For each character, call the count method
+with that character as the argument.
 
-```python
-# 3. How many times is each character mentioned in the text?
+4. (BONUS, optional): Put the character counts computed 
+   above in a dictionary with character names as the keys and 
+   counts as the values.
+5. (BONUS, optional): Use a nested list comprehension 
+   to calculate the number of times each character is 
+   mentioned in each chapter.
 
-# Iterate over the list of characters using a for-loop or 
-# list comprehension. For each character, call the count method
-# with that character as the argument.
-
-
-```
-
-```python
-# 4. (BONUS, optional): Put the character counts computed 
-#    above in a dictionary with character names as the keys and 
-#    counts as the values.
-
-
-```
-
-```python
-# 5. (BONUS, optional): Use a nested list comprehension 
-#    to calculate the number of times each character is 
-#    mentioned in each chapter.
-
-
-```
 
 ## Importing numpy and calculating simple statistics
 Now that we know how to iterate over lists and calculate numbers for each element, we may wish to do some simple math using these numbers. For example, we may want to calculate the mean and standard deviation of the distribution of the number of paragraphs in each chapter. Python has a handful of math functions built-in (e.g., `min` and `max`) but built-in math support is pretty limited.

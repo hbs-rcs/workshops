@@ -194,7 +194,7 @@ Values can be assigned names and used in subsequent operations
 
 ```{r}
 sqrt(10) ## calculate square root of 10; result is not stored anywhere
-x <- sqrt(10) # assign result to a variable named x
+x <- sqrt(10) ## assign result to a variable named x
 ```
 
 Names should start with a letter, and contain only letters, numbers, underscores, and periods.
@@ -274,7 +274,7 @@ Baby names data
 ---------------
 
 The examples in this workshop use US baby names data retrieved from
-https://catalog.data.gov/dataset/baby-names-from-social-security-card-applications-national-level-data
+https://catalog.data.gov/dataset/baby-names-from-social-security-card-applications-national-level-data. 
 A cleaned and merged version of these data is available at
 `http://tutorials.iq.harvard.edu/data/babyNames.csv`.
 
@@ -451,16 +451,16 @@ filter(baby_names_boys1999, Count == max(Count))
 
 Pipe operator in R
 ------------------
-There is one very special operator in R called a "pipe" operator which 
+There is one very handy operator in R called "pipe" operator which 
 looks like this: `%>%`. It allows to "chain" several function calls and, 
-as each funciton returns an object, feed it into the next call in a single 
+as each function returns an object, feed it into the next call in a single 
 statement, without needing extra variables to store the intermediate 
 results. The point of the pipe is to help you write code in a way that is
 easier to read and understand as we will see below.
 
 There is no need to load any additional packages as the operator is made 
-available via the `magrittr` package installed as part of `dplyr`. Let's 
-rewrite the sequence of commands to output ordered counts for names 
+available via the `magrittr` package installed and loaded as part of `dplyr`. 
+Let's rewrite the sequence of commands to output ordered counts for names 
 "Alex" or "Mark".
 
 ```{r}
@@ -477,7 +477,7 @@ entire task in just "one line"!
 Exercise 2.2: Peak popularity of your name
 ------------------------------------------
 
-Rewrite the solution to Exercise 2 using pipes. Remember that we were looking
+Rewrite the solution to Exercise 2.1 using pipes. Remember that we were looking
 for the year your name reached its maximum popularity. For that, we filtered 
 the data and then arranged by `Count.`
 
@@ -505,7 +505,7 @@ It can be difficult to spot trends when looking at summary tables.
 Plotting the data makes it easier to identify interesting patterns.
 
 R has decent plotting tools built-in -- see e.g., `help(plot)`.
-However, again, we will make use of an excelent *contributed
+However, again, we will make use of an excellent *contributed
 package* from `tidyverse` called `ggplot2`.
 
 ```{r}
@@ -617,11 +617,13 @@ number of names in each year:
 
 ```{r}
 baby_names <- mutate(baby_names, Count_1K = Count/1000)
-baby_names # same as print(baby_names)
+baby_names ## same as print(baby_names)
 ```
 
 Notice that executing the second line led to printing all 1.35 mln
-rows in our `data.frame`! If we would just like to glance at the
+rows in our `data.frame` (though R was "smart" enough to truncate 
+the output at 10 rows and give us a gentle reminder that there were 
+"1,352,193 more")! If we would just like to glance at the
 first 6 lines we can use `head()`:
 
 ```{r}
@@ -636,7 +638,7 @@ baby_names_scaled <- select(baby_names, Name, Sex, Year, Count_1K)
 head(baby_names_scaled)
 ```
 
-`select()` can also be used with pipes.
+`select()` can also be used with pipes too:
 
 ```{r}
 baby_names %>% 
@@ -657,10 +659,11 @@ package makes this relatively straightforward.
 baby_names <- 
   baby_names %>%
   group_by(Year, Sex) %>%
-  mutate %>%
+  mutate(Rank = rank(-Count)) %>%
+  arrange(Rank, Year, Sex) %>%
   ungroup
 
-head(baby_names)
+baby_names
 ```
 
 Note that the data remains grouped until you change the groups by
@@ -805,12 +808,12 @@ we did using `mutate()` above, but this time we need to collapse each
 group into a single summary statistic. We can achieve this using the
 `summarize()` function. 
 
-First, let's see how this funciton works without grouping. The following 
-code outputs the total number of girls and boys in the data:
+First, let's see how this function works without grouping. The following 
+code outputs the total number of girls the data:
 ```{r}
 baby_names %>% 
-  summarize(Girls_n = sum(Sex=="Girls"),
-            Boys_n = sum(Sex=="Boys"))
+  filter(Sex == "Girls") %>%
+  summarize(Girls_n = sum(Count))
 ```
 
 Next, using `group_by()` and `summarize()` together, we can calculate the 
@@ -879,8 +882,9 @@ most_popular
 ```
 
 ```{r}
+# #most_popular data.frame is already grouped by Year and Sex
 top10 <- 
-  most_popular %>% #it is already grouped by Year and Sex
+  most_popular %>% 
   summarize(TotalProportion = sum(Proportion))
 ```
 
@@ -905,11 +909,15 @@ Saving our Work
 Now that we have made some changes to our data set, we might want to
 save those changes to a file.
 
-Saving individual datasets
---------------------------
+You can list all the objects in your current workspeace using `ls()`:
 
-You might find functions `write_csv()` and `write_rds()` from package 
-`readr` handy!
+```{r, eval = FALSE}
+ls() # list objects in our workspace
+# rm(list=ls()) # remove all objects from our workspace 
+```
+
+The `data.frames` can be saved using functions `write_csv()` and 
+`write_rds()` from package `readr`.
 
 ```{r, eval = FALSE}
 # write data to a .csv file
@@ -922,24 +930,23 @@ write_rds(baby_names, "babyNames.rds")
 ```
 
 
-Saving and loading R workspaces
--------------------------------
+Best Practiced for Writing R Code
+=================================
 
-In addition to importing individual datasets, R can save and load entire
-workspaces:
-
-```{r, eval = FALSE}
-ls() # list objects in our workspace
-save.image(file="myWorkspace.RData") # save workspace 
-rm(list=ls()) # remove all objects from our workspace 
-ls() # list stored objects to make sure they are deleted
-```
-
-```{r, eval = FALSE}
-## Load the "myWorkspace.RData" file and check that it is restored
-load("myWorkspace.RData") # load myWorkspace.RData
-ls() # list objects
-```
+-   Start each program with a description of what it does.
+-   Then load all required packages.
+-   Consider what working directory you are in when sourcing a script.
+-   Use comments to mark off sections of code.
+-   Put function definitions at the top of your file, or in a separate file if there are many.
+-   Name and style code consistently.
+-   Break code into small, discrete pieces.
+-   Factor out common operations rather than repeating them.
+-   Keep all of the source files for a project in one directory and use relative paths to access them.
+-   Keep track of the memory used by your program.
+-   Always start with a clean environment instead of saving the workspace.
+-   Keep track of session information in your project folder.
+-   Have someone else review your code.
+-   Use version control.
 
 
 Wrap-up

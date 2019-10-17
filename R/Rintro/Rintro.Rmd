@@ -46,8 +46,7 @@ Welcome
 Materials and setup 
 -------------------
 
-**NOTE: skip this section if you are not running R locally** (e.g., if you are
-running R in your browser using a remote Jupyter server)
+**NOTE: skip this section if you are not running R locally**
 
 You should have R installed. If not:
 
@@ -95,7 +94,7 @@ For this workshop we encourage you to use RStudio; it is a good R-specific IDE t
 
 Launch RStudio (skip if not using RStudio)
 ------------------------------------------
-**Note: skip this section if you are not using Rstudio (e.g., if you are running these examples in a Jupyter notebook).**
+**Note: skip this section if you are not using Rstudio.**
 
 -   Start the RStudio program
 -   In RStudio, go to **File -> New File -> R Script**
@@ -909,7 +908,7 @@ Saving our Work
 Now that we have made some changes to our data set, we might want to
 save those changes to a file.
 
-You can list all the objects in your current workspeace using `ls()`:
+You can list all the objects in your current workspace using `ls()`:
 
 ```{r, eval = FALSE}
 ls() # list objects in our workspace
@@ -930,7 +929,7 @@ write_rds(baby_names, "babyNames.rds")
 ```
 
 
-Best Practiced for Writing R Code
+Best Practices for Writing R Code
 =================================
 
 -   Start each program with a description of what it does.

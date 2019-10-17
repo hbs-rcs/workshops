@@ -303,7 +303,7 @@ div.tocify {
 <h1>Welcome</h1>
 <div id="materials-and-setup" class="section level2">
 <h2>Materials and setup</h2>
-<p><strong>NOTE: skip this section if you are not running R locally</strong> (e.g., if you are running R in your browser using a remote Jupyter server)</p>
+<p><strong>NOTE: skip this section if you are not running R locally</strong></p>
 <p>You should have R installed. If not:</p>
 <ul>
 <li>Download and install R from <a href="http://cran.r-project.org" class="uri">http://cran.r-project.org</a></li>
@@ -342,7 +342,7 @@ div.tocify {
 <p>For this workshop we encourage you to use RStudio; it is a good R-specific IDE that mostly just works.</p>
 <div id="launch-rstudio-skip-if-not-using-rstudio" class="section level2">
 <h2>Launch RStudio (skip if not using RStudio)</h2>
-<p><strong>Note: skip this section if you are not using Rstudio (e.g., if you are running these examples in a Jupyter notebook).</strong></p>
+<p><strong>Note: skip this section if you are not using Rstudio.</strong></p>
 <ul>
 <li>Start the RStudio program</li>
 <li>In RStudio, go to <strong>File -&gt; New File -&gt; R Script</strong></li>
@@ -977,7 +977,7 @@ top10 &lt;-<span class="st"> </span>
 <div id="saving-our-work" class="section level1">
 <h1>Saving our Work</h1>
 <p>Now that we have made some changes to our data set, we might want to save those changes to a file.</p>
-<p>You can list all the objects in your current workspeace using <code>ls()</code>:</p>
+<p>You can list all the objects in your current workspace using <code>ls()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>() <span class="co"># list objects in our workspace</span>
 <span class="co"># rm(list=ls()) # remove all objects from our workspace </span></code></pre></div>
 <p>The <code>data.frames</code> can be saved using functions <code>write_csv()</code> and <code>write_rds()</code> from package <code>readr</code>.</p>
@@ -986,8 +986,8 @@ top10 &lt;-<span class="st"> </span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># write data to an R file</span>
 <span class="kw">write_rds</span>(baby_names, <span class="st">&quot;babyNames.rds&quot;</span>)</code></pre></div>
 </div>
-<div id="best-practiced-for-writing-r-code" class="section level1">
-<h1>Best Practiced for Writing R Code</h1>
+<div id="best-practices-for-writing-r-code" class="section level1">
+<h1>Best Practices for Writing R Code</h1>
 <ul>
 <li>Start each program with a description of what it does.</li>
 <li>Then load all required packages.</li>
